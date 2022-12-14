@@ -2317,6 +2317,14 @@ randomicsser@^1.0.1:
   dependencies:
     jsdom "^20.0.3"
 
+randomicsser@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/randomicsser/-/randomicsser-1.0.5.tgz#80cc77392630be2ee59b4e3d72bbc2e6b0419d23"
+  integrity sha512-Ned54PW6oNiHz/NseLUHhN66ca+hPltvDvxUUPPnimOv+DL7/TKUFEGgKZJMSrnoDNIQhfrOSTvMXkO7uetUMQ==
+  dependencies:
+    jsdom "^20.0.3"
+    randomicsser "^1.0.1"
+
 react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"

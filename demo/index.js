@@ -1,6 +1,6 @@
 //Node.js demo of randomiCSSer
 
-import randomCSSVariable from '../lib/index.js';
+import randomCSSVariable from 'randomicsser';
 import fs from 'fs';
 
 const randCSS = randomCSSVariable({

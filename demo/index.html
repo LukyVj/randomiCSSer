@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>Example - Random CSS variables ( with a javascript helper )</title>
-    <script type="module" src="./lib/index.js"></script>
     <style>
       @charset "UTF-8";
       * {
@@ -235,6 +234,21 @@
         display: none;
       }
     </style>
+    <script type="module">
+      import randomCSSVariable from 'https://unpkg.com/randomicsser@1.0.5';
+
+      const fire = () =>
+        randomCSSVariable({
+          variable: 'random',
+          unit: '',
+          amount: 10,
+          range: { min: 1, max: 300, round: true },
+        }).load();
+
+      fire();
+
+      document.querySelector('button').addEventListener('click', () => fire());
+    </script>
   </head>
 
   <body translate="no">
@@ -262,7 +276,6 @@
       </div>
       <div class="controls">
         <button onclick="fire();">refresh variables</button>
-        <button onclick="getVariables();">Get variables as text</button>
         <textarea name="" id="" cols="30" rows="10"></textarea>
       </div>
       <pre><code>randomCssVariable({
@@ -270,24 +283,7 @@
   unit: "",
   amount: 10,
   range: { min: 1, max: 300, round: true },
-  target: { container: ".app" }
 }).load();</code></pre>
     </div>
-    <script>
-      var exports = {};
-    </script>
-
-    <script>
-      // const fire = () =>
-      //   randomCSSVariable({
-      //     variable: 'random',
-      //     unit: '',
-      //     amount: 10,
-      //     range: { min: 1, max: 300, round: true },
-      //     target: { container: '.app' },
-      //   }).load();
-
-      // fire();
-    </script>
   </body>
 </html>
