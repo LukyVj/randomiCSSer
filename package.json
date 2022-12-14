@@ -1,13 +1,21 @@
 {
   "name": "randomicsser",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "A function that returns random numbers as css variables",
-  "main": "lib/index.js",
+  "main": "./lib/index.js",
   "types": "lib/index.d.ts",
   "type": "module",
+  "source": "src/index.ts",
+  "exports": {
+    "require": "./lib/index.cjs",
+    "default": "./lib/index.modern.js"
+  },
+  "module": "./lib/index.module.js",
+  "unpkg": "./lib/index.umd.js",
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "swc src --out-dir lib && cp -R lib demo",
+    "build": "microbundle && cp -R lib demo",
+    "dev": "microbundle watch",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
@@ -28,8 +36,6 @@
   },
   "homepage": "https://github.com/LukyVj/randomiCSSer#readme",
   "devDependencies": {
-    "@swc/cli": "^0.1.57",
-    "@swc/core": "^1.3.22",
     "@types/jest": "^29.2.4",
     "fs": "^0.0.1-security",
     "jest": "^29.3.1",
