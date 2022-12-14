@@ -1,4 +1,4 @@
-import { randomCSSVariable } from '../index';
+import randomCSSVariable from '../index';
 test('randomCSSVariable', () => {
   expect(randomCSSVariable).toBeDefined();
 });

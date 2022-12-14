@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <title>Example - Random CSS variables ( with a javascript helper )</title>
-    <script type="module" src="./index.js"></script>
+    <script type="module" src="./lib/index.js"></script>
     <style>
       @charset "UTF-8";
       * {
@@ -278,16 +278,16 @@
     </script>
 
     <script>
-      const fire = () =>
-        new randomCssVariable({
-          variable: 'random',
-          unit: '',
-          amount: 10,
-          range: { min: 1, max: 300, round: true },
-          target: { container: '.app' },
-        }).load();
+      // const fire = () =>
+      //   randomCSSVariable({
+      //     variable: 'random',
+      //     unit: '',
+      //     amount: 10,
+      //     range: { min: 1, max: 300, round: true },
+      //     target: { container: '.app' },
+      //   }).load();
 
-      fire();
+      // fire();
     </script>
   </body>
 </html>
