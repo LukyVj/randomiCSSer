@@ -65,6 +65,8 @@ By default, you'll see this on the body:
 
 ### With React
 
+{% raw %}
+
 ```js
 const App = () => {
   randomCSSVariable({
@@ -94,6 +96,8 @@ const App = () => {
   );
 };
 ```
+
+{% endraw %}
 
 ### With Node
 

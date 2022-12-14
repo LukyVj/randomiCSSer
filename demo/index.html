@@ -234,8 +234,9 @@
         display: none;
       }
     </style>
-    <script src="https://unpkg.com/randomicsser@1.0.6/lib/index.js"></script>
-    <script>
+    <script src="https://unpkg.com/randomicsser@1.0.7/lib/index.js"></script>
+    <script type="module">
+      import randomCSSVariable from 'https://unpkg.com/randomicsser@1.0.7/lib/index.module.js';
       const fire = () =>
         randomCSSVariable({
           variable: 'random',
@@ -247,6 +248,16 @@
       fire();
 
       document.querySelector('button').addEventListener('click', () => fire());
+      document.querySelector('#json').addEventListener('click', (e) => {
+        document.querySelector('textarea').textContent = JSON.stringify(
+          randomCSSVariable({
+            variable: 'random',
+            unit: '',
+            amount: 10,
+            range: { min: 1, max: 300, round: true },
+          }).getVars(),
+        );
+      });
     </script>
   </head>
 
@@ -274,8 +285,11 @@
         <div data-bar-id="10"></div>
       </div>
       <div class="controls">
-        <button onclick="fire();">refresh variables</button>
+        <button id="refresh">refresh variables</button>
+        <button id="json">Get Variables as JSON</button>
         <textarea name="" id="" cols="30" rows="10"></textarea>
+
+        <div></div>
       </div>
       <pre><code>randomCssVariable({
   variable: "random",
