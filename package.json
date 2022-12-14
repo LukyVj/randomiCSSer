@@ -1,13 +1,20 @@
 {
   "name": "randomicsser",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A function that returns random numbers as css variables",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "type": "module",
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "tsc",
+    "build": "tsc && cp ./lib/index.js ./example/index.js",
     "format": "prettier --write \"src/**/*.ts\"",
-    "lint": "tslint -p tsconfig.json"
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
   },
   "repository": {
     "type": "git",
@@ -22,6 +29,7 @@
   "homepage": "https://github.com/LukyVj/randomiCSSer#readme",
   "devDependencies": {
     "@types/jest": "^29.2.4",
+    "fs": "^0.0.1-security",
     "jest": "^29.3.1",
     "prettier": "^2.8.1",
     "ts-jest": "^29.0.3",
@@ -31,5 +39,8 @@
   },
   "files": [
     "lib/**/*"
-  ]
+  ],
+  "dependencies": {
+    "jsdom": "^20.0.3"
+  }
 }
