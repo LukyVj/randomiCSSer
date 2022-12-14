@@ -15,5 +15,5 @@
     "type": "es6"
   },
   "minify": false,
-  "isModule": true
+  "isModule": false
 }
