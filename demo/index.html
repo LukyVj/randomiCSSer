@@ -139,7 +139,7 @@
         position: relative;
       }
       .demo div[data-bar-id]:after {
-        positon: absolute;
+        position: absolute;
         width: 100%;
         height: 100%;
         display: flex;
@@ -236,7 +236,8 @@
     </style>
     <script src="https://unpkg.com/randomicsser@1.0.7/lib/index.js"></script>
     <script type="module">
-      import randomCSSVariable from 'https://unpkg.com/randomicsser@1.0.7/lib/index.module.js';
+      // import randomCSSVariable from 'https://unpkg.com/randomicsser@1.0.7/lib/index.module.js';
+      import randomCSSVariable from './lib/index.module.js';
       const fire = () =>
         randomCSSVariable({
           variable: 'random',
@@ -247,12 +248,12 @@
 
       fire();
 
-      document.querySelector('button').addEventListener('click', () => fire());
+      document.querySelector('#refresh').addEventListener('click', () => fire());
       document.querySelector('#json').addEventListener('click', (e) => {
         document.querySelector('textarea').textContent = JSON.stringify(
           randomCSSVariable({
             variable: 'random',
-            unit: '',
+            unit: 'px',
             amount: 10,
             range: { min: 1, max: 300, round: true },
           }).getVars(),

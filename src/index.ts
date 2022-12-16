@@ -37,11 +37,8 @@ const randomCSSVariable = ({
   const generate = ({ length, dom }: { length: number; dom: boolean }) => {
     Array.from({ length }).map((_, index) => {
       const VAR_NAME = `--${VARIABLE}-${index}`;
-      const VAR_VALUE =
-        UNIT !== ''
-          ? `"${value(range.min || 1, range.max || 100, range.round || true)}${UNIT}"`
-          : `${value(range.min || 1, range.max || 100, range.round || true)}`;
-      ALL_VARS.push(`{"${VAR_NAME}":${VAR_VALUE}}`);
+      const VAR_VALUE = `${value(range.min || 1, range.max || 100, range.round || true)}${UNIT}`;
+      ALL_VARS.push(`{"${VAR_NAME}":"${VAR_VALUE}"}`);
       if (root && dom) {
         root.style.setProperty(`${VAR_NAME}`, `${VAR_VALUE}`);
       }
