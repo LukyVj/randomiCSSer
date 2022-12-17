@@ -3,302 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <title>Example - Random CSS variables ( with a javascript helper )</title>
-    <style>
-      @charset "UTF-8";
-      * {
-        box-sizing: border-box;
-      }
-
-      :root,
-      html,
-      body {
-        --direction: to bottom;
-        width: 100%;
-        height: 100%;
-        padding: 0;
-        margin: 0;
-        background: linear-gradient(
-            var(--direction),
-            #1afea4 0%,
-            #1afea4 6.25%,
-            #19fea4 12.5%,
-            #12fea5 18.75%,
-            #00fea7 25%,
-            #00ffac 31.25%,
-            #00ffb5 37.5%,
-            #50f9ca 43.75%,
-            #2ffadb 50%,
-            #00faf3 56.25%,
-            #00f8ff 62.5%,
-            #a8e9ff 68.75%,
-            #cee0ff 75%,
-            #f5d4ff 81.25%,
-            #ffccdb 87.5%,
-            #ffd279 93.75%,
-            #2cff9b 100%
-          )
-          no-repeat center center/cover;
-        overflow: hidden;
-        position: relative;
-      }
-
-      html {
-        --direction: to bottom right;
-      }
-
-      body {
-        --direction: to top left;
-        overflow: auto;
-        font-family: Helvetica;
-      }
-
-      header {
-        max-width: 500px;
-        width: 100%;
-        margin: 0.5em auto;
-        background: rgba(255, 255, 255, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 1em;
-        border-radius: 8px;
-        text-align: center;
-        font-size: 0.68em;
-      }
-
-      .controls {
-        max-width: 500px;
-        width: 100%;
-        margin: 0.5em auto;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 8px;
-        margin: 0.5em auto;
-      }
-
-      button {
-        background: rgba(255, 255, 255, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 1em;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-      button:hover {
-        background: rgba(255, 255, 255, 0.6);
-        border: 1px solid rgba(255, 255, 255, 0.5);
-      }
-
-      div.probe,
-      pre {
-        max-width: 500px;
-        width: 100%;
-        margin: 0.5em auto;
-        background: rgba(255, 255, 255, 0.3);
-        border: 1px solid rgba(255, 255, 255, 0.3);
-        padding: 1em;
-        border-radius: 8px;
-      }
-
-      div.probe:after {
-        white-space: pre;
-        word-wrap: wrap-all;
-        font-size: 0.85em;
-        counter-reset: random-1 var(--random-0, 0) random-2 var(--random-1, 0) random-3 var(--random-2, 0) random-4
-          var(--random-3, 0) random-5 var(--random-4, 0) random-6 var(--random-5, 0) random-7 var(--random-6, 0)
-          random-8 var(--random-7, 0) random-9 var(--random-8, 0) random-10 var(--random-9, 0);
-        content: 'CSS variables with random numbers:\a```\a--random-0: 'counter(random-1) ';\a--random-1: 'counter(
-            random-2
-          )
-          ';\a--random-2: 'counter(random-3) ';\a--random-3: 'counter(random-4) ';\a--random-4: 'counter(random-5) ';\a--random-5: 'counter(
-            random-6
-          )
-          ';\a--random-6: 'counter(random-7) ';\a--random-7: 'counter(random-8) ';\a--random-8: 'counter(random-9) ';\a--random-9: 'counter(
-            random-10
-          )
-          ";\a```\a\a𝙛𝙤𝙧 𝙩𝙝𝙚 𝙥𝙪𝙧𝙥𝙤𝙨𝙚 𝙤𝙛 𝙩𝙝𝙞𝙨 𝙙𝙚𝙢𝙤, 𝙪𝙨𝙞𝙣𝙜 𝙖 '𝙪𝙣𝙞𝙩' 𝙬𝙤𝙣𝙩 𝙬𝙤𝙧𝙠 𝙗𝙚𝙘𝙖𝙪𝙨𝙚 𝙩𝙝𝙚 𝙬𝙖𝙮 𝙄 𝙧𝙚𝙣𝙙𝙚𝙧\a𝙩𝙝𝙚 𝙘𝙨𝙨 𝙫𝙖𝙡𝙪𝙚𝙨 𝙞𝙣 𝙩𝙝𝙚 '𝙘𝙤𝙣𝙩𝙚𝙣𝙩' 𝙖𝙩𝙩𝙧𝙞𝙗𝙪𝙩𝙚, 𝙤𝙣𝙡𝙮 𝙖𝙘𝙘𝙚𝙥𝙩 𝙣𝙪𝙢𝙗𝙚𝙧𝙨 𝙖𝙣𝙙 𝙣𝙤𝙩 𝙩𝙚𝙭𝙩.)";
-      }
-
-      .demo {
-        display: flex;
-        align-items: flex-end;
-        justify-content: space-around;
-        width: -webkit-min-content;
-        width: -moz-min-content;
-        width: min-content;
-        max-width: 500px;
-        width: 100%;
-        margin: 0.5em auto;
-        height: 300px;
-      }
-
-      .demo div[data-bar-id] {
-        max-width: 50px;
-        width: 100%;
-        background: linear-gradient(to bottom right, #ee243c, #faa04b, #faa04b, #e90a96);
-        margin-right: 8px;
-        transition: height 0.2s ease;
-        display: flex;
-        text-align: center;
-        position: relative;
-      }
-      .demo div[data-bar-id]:after {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: courier;
-        font-weight: bold;
-        color: white;
-      }
-
-      .demo div[data-bar-id='1'] {
-        height: calc(var(--random-0) * 1px);
-        filter: hue-rotate(var(--hue-0));
-      }
-      .demo div[data-bar-id='1']:after {
-        counter-reset: random-0 var(--random-0, 0);
-        content: counter(random-0);
-      }
-
-      .demo div[data-bar-id='2'] {
-        height: calc(var(--random-1) * 1px);
-        filter: hue-rotate(var(--hue-1));
-      }
-      .demo div[data-bar-id='2']:after {
-        counter-reset: random-1 var(--random-1, 0);
-        content: counter(random-1);
-      }
-
-      .demo div[data-bar-id='3'] {
-        height: calc(var(--random-2) * 1px);
-        filter: hue-rotate(var(--hue-2));
-      }
-      .demo div[data-bar-id='3']:after {
-        counter-reset: random-2 var(--random-2, 0);
-        content: counter(random-2);
-      }
-
-      .demo div[data-bar-id='4'] {
-        height: calc(var(--random-3) * 1px);
-        filter: hue-rotate(var(--hue-3));
-      }
-      .demo div[data-bar-id='4']:after {
-        counter-reset: random-3 var(--random-3, 0);
-        content: counter(random-3);
-      }
-
-      .demo div[data-bar-id='5'] {
-        height: calc(var(--random-4) * 1px);
-        filter: hue-rotate(var(--hue-4));
-      }
-      .demo div[data-bar-id='5']:after {
-        counter-reset: random-4 var(--random-4, 0);
-        content: counter(random-4);
-      }
-
-      .demo div[data-bar-id='6'] {
-        height: calc(var(--random-5) * 1px);
-        filter: hue-rotate(var(--hue-5));
-      }
-      .demo div[data-bar-id='6']:after {
-        counter-reset: random-5 var(--random-5, 0);
-        content: counter(random-5);
-      }
-
-      .demo div[data-bar-id='7'] {
-        height: calc(var(--random-6) * 1px);
-        filter: hue-rotate(var(--hue-6));
-      }
-      .demo div[data-bar-id='7']:after {
-        counter-reset: random-6 var(--random-6, 0);
-        content: counter(random-6);
-      }
-
-      .demo div[data-bar-id='8'] {
-        height: calc(var(--random-7) * 1px);
-        filter: hue-rotate(var(--hue-7));
-      }
-      .demo div[data-bar-id='8']:after {
-        counter-reset: random-7 var(--random-7, 0);
-        content: counter(random-7);
-      }
-
-      .demo div[data-bar-id='9'] {
-        height: calc(var(--random-8) * 1px);
-        filter: hue-rotate(var(--hue-8));
-      }
-      .demo div[data-bar-id='9']:after {
-        counter-reset: random-8 var(--random-8, 0);
-        content: counter(random-8);
-      }
-
-      .demo div[data-bar-id='10'] {
-        height: calc(var(--random-9) * 1px);
-        filter: hue-rotate(var(--hue-9));
-      }
-      .demo div[data-bar-id='10']:after {
-        counter-reset: random-9 var(--random-9, 0);
-        content: counter(random-9);
-      }
-
-      textarea:empty {
-        display: none;
-      }
-    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;400;900&display=swap" rel="stylesheet" />
+    <link rel="import" href="art.html" />
+    <link rel="stylesheet" href="./index.css" />
     <script type="module">
-      // import randomCSSVariables from 'https://unpkg.com/randomicsser@latest/lib/index.module.js';
+      // import randomCSSVariables from 'https://unpkg.com/randomicsser@1.0.10/lib/index.module.js';
       import randomCSSVariables from './lib/index.module.js';
-      const fire = () => {
-        randomCSSVariables({
+
+      window.randomCSSVariables = randomCSSVariables;
+
+      const data = [
+        {
           variable: 'random',
           unit: '',
           amount: 10,
           range: { min: 1, max: 300, round: true },
-        }).load();
-
-        randomCSSVariables({
+        },
+        {
           variable: 'hue',
           unit: 'deg',
           amount: 10,
           range: { min: 0, max: 360, round: false },
-        }).load();
+        },
+        {
+          variable: 'fsz',
+          amount: 16,
+          range: { min: 20, max: 52, round: true },
+        },
+      ];
+
+      const fire = () => {
+        randomCSSVariables(data).load();
       };
 
       fire();
 
       document.querySelector('#refresh').addEventListener('click', () => fire());
       document.querySelector('#json').addEventListener('click', (e) => {
-        document.querySelector('textarea').textContent = JSON.stringify(
-          randomCSSVariables({
-            variable: 'random',
-            unit: 'px',
-            amount: 10,
-            range: { min: 1, max: 300, round: true },
-          }).getVars(),
-        );
+        document.querySelector('textarea').textContent = JSON.stringify(randomCSSVariables(data).getVars());
       });
-
-      randomCSSVariables({
-        variable: 'test',
-        amount: 10,
-        range: { min: 0, max: 100 },
-        round: false,
-      }).load();
     </script>
   </head>
 
   <body translate="no">
     <div class="app">
-      <header>
-        <h1>Random CSS variables</h1>
+      <header class="container">
+        <h1>
+          <span>R</span><span>a</span><span>n</span><span>d</span><span>o</span><span>m</span>&nbsp;<span></span
+          ><span>C</span><span>S</span><span>S</span>&nbsp;<span>v</span><span>a</span><span>r</span><span>i</span
+          ><span>a</span><span>b</span><span>l</span><span>e</span><span>s</span>
+        </h1>
         <h2>( with a javascript helper )</h2>
       </header>
 
-      <div class="probe">
+      <div class="probe container">
         <span></span>
       </div>
 
-      <div class="demo">
+      <div class="demo container">
         <div data-bar-id="1"></div>
         <div data-bar-id="2"></div>
         <div data-bar-id="3"></div>
@@ -310,19 +74,29 @@
         <div data-bar-id="9"></div>
         <div data-bar-id="10"></div>
       </div>
-      <div class="controls">
+      <div class="controls container">
         <button id="refresh">refresh variables</button>
         <button id="json">Get Variables as JSON</button>
         <textarea name="" id="" cols="30" rows="10"></textarea>
 
         <div></div>
       </div>
-      <pre><code>randomCssVariable({
+      <div class="container">
+        <pre><code>randomCssVariable({
   variable: "random",
   unit: "",
   amount: 10,
   range: { min: 1, max: 300, round: true },
 }).load();</code></pre>
+      </div>
     </div>
+
+    <script>
+      if ('import' in document.createElement('link')) {
+        console.log('Imports are supported');
+      } else {
+        console.log('Imports are not supported');
+      }
+    </script>
   </body>
 </html>

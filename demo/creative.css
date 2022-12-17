@@ -1,0 +1,142 @@
+/* Header text*/
+
+header h1 span:nth-child(1) {
+  font-size: calc(var(--fsz-0) * 1px);
+}
+header h1 span:nth-child(2) {
+  font-size: calc(var(--fsz-1) * 1px);
+}
+header h1 span:nth-child(3) {
+  font-size: calc(var(--fsz-2) * 1px);
+}
+header h1 span:nth-child(4) {
+  font-size: calc(var(--fsz-3) * 1px);
+}
+header h1 span:nth-child(5) {
+  font-size: calc(var(--fsz-4) * 1px);
+}
+header h1 span:nth-child(6) {
+  font-size: calc(var(--fsz-5) * 1px);
+}
+header h1 span:nth-child(7) {
+  font-size: calc(var(--fsz-6) * 1px);
+}
+header h1 span:nth-child(8) {
+  font-size: calc(var(--fsz-7) * 1px);
+}
+header h1 span:nth-child(9) {
+  font-size: calc(var(--fsz-8) * 1px);
+}
+header h1 span:nth-child(10) {
+  font-size: calc(var(--fsz-9) * 1px);
+}
+header h1 span:nth-child(11) {
+  font-size: calc(var(--fsz-10) * 1px);
+}
+header h1 span:nth-child(12) {
+  font-size: calc(var(--fsz-11) * 1px);
+}
+header h1 span:nth-child(13) {
+  font-size: calc(var(--fsz-12) * 1px);
+}
+header h1 span:nth-child(14) {
+  font-size: calc(var(--fsz-13) * 1px);
+}
+header h1 span:nth-child(15) {
+  font-size: calc(var(--fsz-14) * 1px);
+}
+header h1 span:nth-child(16) {
+  font-size: calc(var(--fsz-15) * 1px);
+}
+
+/* demo bars */
+
+.demo div[data-bar-id='1'] {
+  height: calc(var(--random-0) * 1px);
+  filter: hue-rotate(var(--hue-0));
+}
+.demo div[data-bar-id='1']:after {
+  counter-reset: random-0 var(--random-0, 0);
+  content: counter(random-0);
+}
+
+.demo div[data-bar-id='2'] {
+  height: calc(var(--random-1) * 1px);
+  filter: hue-rotate(var(--hue-1));
+}
+.demo div[data-bar-id='2']:after {
+  counter-reset: random-1 var(--random-1, 0);
+  content: counter(random-1);
+}
+
+.demo div[data-bar-id='3'] {
+  height: calc(var(--random-2) * 1px);
+  filter: hue-rotate(var(--hue-2));
+}
+.demo div[data-bar-id='3']:after {
+  counter-reset: random-2 var(--random-2, 0);
+  content: counter(random-2);
+}
+
+.demo div[data-bar-id='4'] {
+  height: calc(var(--random-3) * 1px);
+  filter: hue-rotate(var(--hue-3));
+}
+.demo div[data-bar-id='4']:after {
+  counter-reset: random-3 var(--random-3, 0);
+  content: counter(random-3);
+}
+
+.demo div[data-bar-id='5'] {
+  height: calc(var(--random-4) * 1px);
+  filter: hue-rotate(var(--hue-4));
+}
+.demo div[data-bar-id='5']:after {
+  counter-reset: random-4 var(--random-4, 0);
+  content: counter(random-4);
+}
+
+.demo div[data-bar-id='6'] {
+  height: calc(var(--random-5) * 1px);
+  filter: hue-rotate(var(--hue-5));
+}
+.demo div[data-bar-id='6']:after {
+  counter-reset: random-5 var(--random-5, 0);
+  content: counter(random-5);
+}
+
+.demo div[data-bar-id='7'] {
+  height: calc(var(--random-6) * 1px);
+  filter: hue-rotate(var(--hue-6));
+}
+.demo div[data-bar-id='7']:after {
+  counter-reset: random-6 var(--random-6, 0);
+  content: counter(random-6);
+}
+
+.demo div[data-bar-id='8'] {
+  height: calc(var(--random-7) * 1px);
+  filter: hue-rotate(var(--hue-7));
+}
+.demo div[data-bar-id='8']:after {
+  counter-reset: random-7 var(--random-7, 0);
+  content: counter(random-7);
+}
+
+.demo div[data-bar-id='9'] {
+  height: calc(var(--random-8) * 1px);
+  filter: hue-rotate(var(--hue-8));
+}
+.demo div[data-bar-id='9']:after {
+  counter-reset: random-8 var(--random-8, 0);
+  content: counter(random-8);
+}
+
+.demo div[data-bar-id='10'] {
+  height: calc(var(--random-9) * 1px);
+  filter: hue-rotate(var(--hue-9));
+}
+.demo div[data-bar-id='10']:after {
+  counter-reset: random-9 var(--random-9, 0);
+  content: counter(random-9);
+}

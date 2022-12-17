@@ -9,7 +9,7 @@ interface RandomCSSVariableProps {
         round?: boolean;
     };
 }
-declare const randomCSSVariable: ({ variable, unit, amount, target, range, }: RandomCSSVariableProps) => {
+declare const randomCSSVariable: (opts: RandomCSSVariableProps | RandomCSSVariableProps[]) => {
     load: (dom?: boolean) => void;
     getVars: (i?: number) => any;
 };

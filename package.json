@@ -51,6 +51,6 @@
   ],
   "dependencies": {
     "jsdom": "^20.0.3",
-    "randomicsser": "^1.0.1"
+    "randomicsser": "^1.0.10"
   }
 }

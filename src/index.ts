@@ -10,23 +10,9 @@ interface RandomCSSVariableProps {
   };
 }
 
-const randomCSSVariable = ({
-  variable = 'random',
-  unit = '',
-  amount = 3,
-  target = typeof window === 'undefined' ? null : document.querySelector('body'),
-  range = {
-    min: 1,
-    max: 100,
-    round: false,
-  },
-}: RandomCSSVariableProps) => {
-  const root = target;
-
-  const ALL_VARS: string[] = [];
-  const VARIABLE = variable;
-  const UNIT = unit;
-  const AMOUNT = amount;
+const randomCSSVariable = (opts: RandomCSSVariableProps | RandomCSSVariableProps[]) => {
+  const options = Array.isArray(opts) ? opts : [opts];
+  const GLOBAL_VARS: string[] = [];
 
   const value = (min: number, max: number, round: boolean) => {
     const delta = max - min;
@@ -34,27 +20,56 @@ const randomCSSVariable = ({
 
     return rand;
   };
-  const generate = ({ length, dom }: { length: number; dom: boolean }) => {
-    Array.from({ length }).map((_, index) => {
-      const VAR_NAME = `--${VARIABLE}-${index}`;
-      const VAR_VALUE = `${value(range.min || 1, range.max || 100, range.round as boolean)}${UNIT}`;
-      ALL_VARS.push(`{"${VAR_NAME}":"${VAR_VALUE}"}`);
+  const generate = ({ amount, variable, unit, range, target, dom }: RandomCSSVariableProps & { dom: boolean }) => {
+    const root = target;
+    let VAR_GROUP_VALUE: Array<{ [x: string]: string | number }> = [];
+    let VAR_GROUP = { [variable as string]: VAR_GROUP_VALUE };
+    let ALL_VARS: string[] = [];
+
+    Array.from({ length: amount! }).map((_, index) => {
+      const VAR_NAME = `--${variable}-${index}`;
+      const VAR_VALUE: string | number = unit
+        ? `${value(range!.min!, range!.max!, range!.round!)}${unit}`
+        : value(range!.min!, range!.max!, range!.round!);
+
+      VAR_GROUP_VALUE.push({ [VAR_NAME as string]: VAR_VALUE as string | number });
       if (root && dom) {
         root.style.setProperty(`${VAR_NAME}`, `${VAR_VALUE}`);
       }
     });
+
+    ALL_VARS.push(JSON.stringify(VAR_GROUP));
+    GLOBAL_VARS.push(ALL_VARS.join(','));
   };
 
   const load = (dom?: boolean) => {
-    generate({
-      length: AMOUNT,
-      dom: dom === false ? false : true,
-    });
+    options.map(
+      ({
+        variable = 'random',
+        unit = '',
+        amount = 3,
+        target = typeof window === 'undefined' ? null : document.querySelector('body'),
+        range = {
+          min: 1,
+          max: 100,
+          round: false,
+        },
+      }) => {
+        generate({
+          amount,
+          variable,
+          unit,
+          range,
+          target,
+          dom: dom === false ? false : true,
+        });
+      },
+    );
   };
 
   const getVars = (i?: number) => {
     load(false);
-    const result = i ? ALL_VARS[i] : ALL_VARS.join(',');
+    const result = i ? GLOBAL_VARS[i] : GLOBAL_VARS.join(',');
     return JSON.parse(`[${result}]`);
   };
 
