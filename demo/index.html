@@ -126,6 +126,7 @@
         max-width: 500px;
         width: 100%;
         margin: 0.5em auto;
+        height: 300px;
       }
 
       .demo div[data-bar-id] {
@@ -152,6 +153,7 @@
 
       .demo div[data-bar-id='1'] {
         height: calc(var(--random-0) * 1px);
+        filter: hue-rotate(var(--hue-0));
       }
       .demo div[data-bar-id='1']:after {
         counter-reset: random-0 var(--random-0, 0);
@@ -160,6 +162,7 @@
 
       .demo div[data-bar-id='2'] {
         height: calc(var(--random-1) * 1px);
+        filter: hue-rotate(var(--hue-1));
       }
       .demo div[data-bar-id='2']:after {
         counter-reset: random-1 var(--random-1, 0);
@@ -168,6 +171,7 @@
 
       .demo div[data-bar-id='3'] {
         height: calc(var(--random-2) * 1px);
+        filter: hue-rotate(var(--hue-2));
       }
       .demo div[data-bar-id='3']:after {
         counter-reset: random-2 var(--random-2, 0);
@@ -176,6 +180,7 @@
 
       .demo div[data-bar-id='4'] {
         height: calc(var(--random-3) * 1px);
+        filter: hue-rotate(var(--hue-3));
       }
       .demo div[data-bar-id='4']:after {
         counter-reset: random-3 var(--random-3, 0);
@@ -184,6 +189,7 @@
 
       .demo div[data-bar-id='5'] {
         height: calc(var(--random-4) * 1px);
+        filter: hue-rotate(var(--hue-4));
       }
       .demo div[data-bar-id='5']:after {
         counter-reset: random-4 var(--random-4, 0);
@@ -192,6 +198,7 @@
 
       .demo div[data-bar-id='6'] {
         height: calc(var(--random-5) * 1px);
+        filter: hue-rotate(var(--hue-5));
       }
       .demo div[data-bar-id='6']:after {
         counter-reset: random-5 var(--random-5, 0);
@@ -200,6 +207,7 @@
 
       .demo div[data-bar-id='7'] {
         height: calc(var(--random-6) * 1px);
+        filter: hue-rotate(var(--hue-6));
       }
       .demo div[data-bar-id='7']:after {
         counter-reset: random-6 var(--random-6, 0);
@@ -208,6 +216,7 @@
 
       .demo div[data-bar-id='8'] {
         height: calc(var(--random-7) * 1px);
+        filter: hue-rotate(var(--hue-7));
       }
       .demo div[data-bar-id='8']:after {
         counter-reset: random-7 var(--random-7, 0);
@@ -216,6 +225,7 @@
 
       .demo div[data-bar-id='9'] {
         height: calc(var(--random-8) * 1px);
+        filter: hue-rotate(var(--hue-8));
       }
       .demo div[data-bar-id='9']:after {
         counter-reset: random-8 var(--random-8, 0);
@@ -224,6 +234,7 @@
 
       .demo div[data-bar-id='10'] {
         height: calc(var(--random-9) * 1px);
+        filter: hue-rotate(var(--hue-9));
       }
       .demo div[data-bar-id='10']:after {
         counter-reset: random-9 var(--random-9, 0);
@@ -234,24 +245,31 @@
         display: none;
       }
     </style>
-    <script src="https://unpkg.com/randomicsser@1.0.7/lib/index.js"></script>
     <script type="module">
-      // import randomCSSVariable from 'https://unpkg.com/randomicsser@1.0.7/lib/index.module.js';
-      import randomCSSVariable from './lib/index.module.js';
-      const fire = () =>
-        randomCSSVariable({
+      // import randomCSSVariables from 'https://unpkg.com/randomicsser@latest/lib/index.module.js';
+      import randomCSSVariables from './lib/index.module.js';
+      const fire = () => {
+        randomCSSVariables({
           variable: 'random',
           unit: '',
           amount: 10,
           range: { min: 1, max: 300, round: true },
         }).load();
 
+        randomCSSVariables({
+          variable: 'hue',
+          unit: 'deg',
+          amount: 10,
+          range: { min: 0, max: 360, round: false },
+        }).load();
+      };
+
       fire();
 
       document.querySelector('#refresh').addEventListener('click', () => fire());
       document.querySelector('#json').addEventListener('click', (e) => {
         document.querySelector('textarea').textContent = JSON.stringify(
-          randomCSSVariable({
+          randomCSSVariables({
             variable: 'random',
             unit: 'px',
             amount: 10,
@@ -259,6 +277,13 @@
           }).getVars(),
         );
       });
+
+      randomCSSVariables({
+        variable: 'test',
+        amount: 10,
+        range: { min: 0, max: 100 },
+        round: false,
+      }).load();
     </script>
   </head>
 
