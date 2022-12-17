@@ -22,9 +22,9 @@ const randomCSSVariable = (opts: RandomCSSVariableProps | RandomCSSVariableProps
   };
   const generate = ({ amount, variable, unit, range, target, dom }: RandomCSSVariableProps & { dom: boolean }) => {
     const root = target;
-    let VAR_GROUP_VALUE: Array<{ [x: string]: string | number }> = [];
-    let VAR_GROUP = { [variable as string]: VAR_GROUP_VALUE };
-    let ALL_VARS: string[] = [];
+    const VAR_GROUP_VALUE: { [x: string]: string | number }[] = [];
+    const VAR_GROUP = { [variable as string]: VAR_GROUP_VALUE };
+    const ALL_VARS: string[] = [];
 
     Array.from({ length: amount! }).map((_, index) => {
       const VAR_NAME = `--${variable}-${index}`;
