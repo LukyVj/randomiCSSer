@@ -29,8 +29,45 @@
         },
         {
           variable: 'fsz',
-          amount: 16,
+          amount: document.querySelector('header h1').childNodes.length,
           range: { min: 20, max: 52, round: true },
+        },
+        {
+          variable: 'opacity',
+          unit: '',
+          amount: 100,
+          range: { min: 0, max: 1, round: false },
+        },
+        {
+          variable: 'hue-2',
+          amount: 100,
+          unit: 'deg',
+          range: { min: 0, max: 360, round: false },
+        },
+        {
+          variable: 'radius',
+          amount: 100,
+          unit: 'px',
+          range: { min: 0, max: 60, round: true },
+        },
+        // rgb
+        {
+          variable: 'rgb-r',
+          amount: 1,
+          unit: '',
+          range: { min: 0, max: 255, round: true },
+        },
+        {
+          variable: 'rgb-g',
+          amount: 1,
+          unit: '',
+          range: { min: 0, max: 255, round: true },
+        },
+        {
+          variable: 'rgb-b',
+          amount: 1,
+          unit: '',
+          range: { min: 0, max: 255, round: true },
         },
       ];
 
@@ -73,6 +110,113 @@
         <div data-bar-id="8"></div>
         <div data-bar-id="9"></div>
         <div data-bar-id="10"></div>
+      </div>
+
+      <div class="container grid" style="background-color: rgb(255 255 255 / 60%)">
+        <div data-cell="1"></div>
+        <div data-cell="2"></div>
+        <div data-cell="3"></div>
+        <div data-cell="4"></div>
+        <div data-cell="5"></div>
+        <div data-cell="6"></div>
+        <div data-cell="7"></div>
+        <div data-cell="8"></div>
+        <div data-cell="9"></div>
+        <div data-cell="10"></div>
+        <div data-cell="11"></div>
+        <div data-cell="12"></div>
+        <div data-cell="13"></div>
+        <div data-cell="14"></div>
+        <div data-cell="15"></div>
+        <div data-cell="16"></div>
+        <div data-cell="17"></div>
+        <div data-cell="18"></div>
+        <div data-cell="19"></div>
+        <div data-cell="20"></div>
+        <div data-cell="21"></div>
+        <div data-cell="22"></div>
+        <div data-cell="23"></div>
+        <div data-cell="24"></div>
+        <div data-cell="25"></div>
+        <div data-cell="26"></div>
+        <div data-cell="27"></div>
+        <div data-cell="28"></div>
+        <div data-cell="29"></div>
+        <div data-cell="30"></div>
+        <div data-cell="31"></div>
+        <div data-cell="32"></div>
+        <div data-cell="33"></div>
+        <div data-cell="34"></div>
+        <div data-cell="35"></div>
+        <div data-cell="36"></div>
+        <div data-cell="37"></div>
+        <div data-cell="38"></div>
+        <div data-cell="39"></div>
+        <div data-cell="40"></div>
+        <div data-cell="41"></div>
+        <div data-cell="42"></div>
+        <div data-cell="43"></div>
+        <div data-cell="44"></div>
+        <div data-cell="45"></div>
+        <div data-cell="46"></div>
+        <div data-cell="47"></div>
+        <div data-cell="48"></div>
+        <div data-cell="49"></div>
+        <div data-cell="50"></div>
+        <div data-cell="51"></div>
+        <div data-cell="52"></div>
+        <div data-cell="53"></div>
+        <div data-cell="54"></div>
+        <div data-cell="55"></div>
+        <div data-cell="56"></div>
+        <div data-cell="57"></div>
+        <div data-cell="58"></div>
+        <div data-cell="59"></div>
+        <div data-cell="60"></div>
+        <div data-cell="61"></div>
+        <div data-cell="62"></div>
+        <div data-cell="63"></div>
+        <div data-cell="64"></div>
+        <div data-cell="65"></div>
+        <div data-cell="66"></div>
+        <div data-cell="67"></div>
+        <div data-cell="68"></div>
+        <div data-cell="69"></div>
+        <div data-cell="70"></div>
+        <div data-cell="71"></div>
+        <div data-cell="72"></div>
+        <div data-cell="73"></div>
+        <div data-cell="74"></div>
+        <div data-cell="75"></div>
+        <div data-cell="76"></div>
+        <div data-cell="77"></div>
+        <div data-cell="78"></div>
+        <div data-cell="79"></div>
+        <div data-cell="80"></div>
+        <div data-cell="81"></div>
+        <div data-cell="82"></div>
+        <div data-cell="83"></div>
+        <div data-cell="84"></div>
+        <div data-cell="85"></div>
+        <div data-cell="86"></div>
+        <div data-cell="87"></div>
+        <div data-cell="88"></div>
+        <div data-cell="89"></div>
+        <div data-cell="90"></div>
+        <div data-cell="91"></div>
+        <div data-cell="92"></div>
+        <div data-cell="93"></div>
+        <div data-cell="94"></div>
+        <div data-cell="95"></div>
+        <div data-cell="96"></div>
+        <div data-cell="97"></div>
+        <div data-cell="98"></div>
+        <div data-cell="99"></div>
+        <div data-cell="100"></div>
+      </div>
+
+      <div class="container">
+        <div data-rgb></div>
       </div>
       <div class="controls container">
         <button id="refresh">refresh variables</button>

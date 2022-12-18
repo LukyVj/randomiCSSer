@@ -59,6 +59,7 @@ body {
 header {
   text-align: center;
   font-size: 0.68em;
+  height: 200px;
 }
 
 header h1 {
@@ -76,6 +77,11 @@ header h1 {
 header h1 span {
   display: inline-block;
   transition: font-size 0.5s ease;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
 }
 
 .controls {
@@ -137,6 +143,7 @@ div.probe:after {
   max-width: var(--container-width);
   width: 100%;
   margin: 0.5em auto;
+  height: 400px;
 }
 
 .demo div[data-bar-id] {

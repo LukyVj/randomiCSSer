@@ -1,6 +1,6 @@
 {
   "name": "randomicsser",
-  "version": "1.0.11",
+  "version": "1.0.13",
   "description": "A function that returns random numbers as css variables",
   "main": "./lib/index.js",
   "types": "lib/index.d.ts",
@@ -14,7 +14,7 @@
   "unpkg": "./lib/index.umd.js",
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "microbundle && cp -R lib demo",
+    "build": "microbundle && sh scripts/version.sh && cp -R lib demo",
     "dev": "microbundle watch",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",

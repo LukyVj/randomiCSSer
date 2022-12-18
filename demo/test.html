@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Example - Random CSS variables ( with a javascript helper )</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@200;400;900&display=swap" rel="stylesheet" />
+    <link rel="import" href="art.html" />
+    <link rel="stylesheet" href="./index.css" />
+    <script type="module">
+      // import randomCSSVariables from 'https://unpkg.com/randomicsser@1.0.10/lib/index.module.js';
+      import randomCSSVariables from './lib/index.module.js';
+
+      window.randomCSSVariables = randomCSSVariables;
+
+      const blendmode = [
+        'plus-darker',
+        'plus-lighter',
+        'normal',
+        'multiply',
+        'screen',
+        'overlay',
+        'darken',
+        'lighten',
+        'color-dodge',
+        'color-burn',
+        'hard-light',
+        'soft-light',
+        'difference',
+        'exclusion',
+        'hue',
+        'saturation',
+        'color',
+        'luminosity',
+      ];
+
+      const fire = () => {
+        randomCSSVariables([
+          ...['r', 'g', 'b'].map((c) => ({
+            variable: `rgb-${c}`,
+            amount: 100,
+            target: document.querySelector('div'),
+            range: { min: 1, max: 255, round: true },
+          })),
+          {
+            variable: 'position',
+            amount: 100,
+            target: document.querySelector('div'),
+            range: { min: 0, max: 50, round: true },
+            unit: '%',
+          },
+          {
+            variable: 'blend-mode',
+            amount: 100,
+            target: document.querySelector('div'),
+            range: { min: 0, max: 1, round: true },
+            values: blendmode,
+          },
+          {
+            variable: 'direction',
+            unit: '',
+            amount: 100,
+            target: document.querySelector('div'),
+            range: { min: 0, max: 360, round: true },
+            values: [
+              'to top',
+              'to right',
+              'to bottom',
+              'to left',
+              'to top right',
+              'to bottom right',
+              'to bottom left',
+              'to top left',
+            ],
+          },
+          {
+            variable: 'test',
+            amount: 100,
+            target: document.querySelector('div'),
+            range: { round: true },
+            values: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+          },
+        ]).load();
+      };
+      fire();
+
+      window.fire = fire;
+    </script>
+    <style>
+      body div {
+        margin: 0 auto;
+        width: 50vw;
+        height: 50vw;
+        background-color: red;
+        background-image: linear-gradient(
+          var(--direction),
+          rgb(var(--rgb-r-0) var(--rgb-g-0) var(--rgb-b-0)) var(--position-0),
+          rgb(var(--rgb-r-1) var(--rgb-g-1) var(--rgb-b-1)) var(--position-1),
+          rgb(var(--rgb-r-2) var(--rgb-g-2) var(--rgb-b-2)) var(--position-2),
+          rgb(var(--rgb-r-3) var(--rgb-g-3) var(--rgb-b-3)) var(--position-3),
+          rgb(var(--rgb-r-4) var(--rgb-g-4) var(--rgb-b-4)) var(--position-4),
+          rgb(var(--rgb-r-5) var(--rgb-g-5) var(--rgb-b-5)) var(--position-5),
+          rgb(var(--rgb-r-6) var(--rgb-g-6) var(--rgb-b-6)) var(--position-6),
+          rgb(var(--rgb-r-7) var(--rgb-g-7) var(--rgb-b-7)) var(--position-7),
+          rgb(var(--rgb-r-8) var(--rgb-g-8) var(--rgb-b-8)) var(--position-8),
+          rgb(var(--rgb-r-9) var(--rgb-g-9) var(--rgb-b-9)) var(--position-9)
+        );
+        mix-blend-mode: var(--blend-mode);
+      }
+    </style>
+  </head>
+
+  <body translate="no">
+    <div onclick="window.fire();"></div>
+  </body>
+</html>
