@@ -1,3 +1,12 @@
+## [1.0.13](https://github.com/LukyVj/randomiCSSer/compare/v1.0.11...v1.0.13) (2022-12-18)
+
+
+### Features
+
+* **index:** allow custom values ([81e66ee](https://github.com/LukyVj/randomiCSSer/commit/81e66ee49e0108550b2c5f29fb93aff86c2c9f84))
+
+
+
 ## 1.0.11 (2022-12-17)
 
 ### Features
