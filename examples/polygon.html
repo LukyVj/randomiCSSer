@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>randomicsser - Example polygon</title>
+  </head>
+
+  <style>
+    .polygon {
+      background-color: blueviolet;
+      width: 300px;
+      height: 300px;
+      transition: clip-path 0.5s ease-in-out;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div class="polygon"></div>
+
+      <pre>
+        <code>
+          </code>
+      </pre>
+    </div>
+
+    <script type="module">
+      import randomCSSVariable from '../lib/index.module.js';
+      window.randomCSSVariable = randomCSSVariable;
+
+      const makePoints = () => {
+        randomCSSVariable({
+          target: document.querySelector('#app'),
+          amount: 30,
+          unit: '%',
+          variable: 'poly',
+          range: {
+            round: true,
+            min: 0,
+            max: 100,
+          },
+        }).load();
+        const points = [];
+        for (let i = 0; i < 30; i++) {
+          points.push(
+            `${getComputedStyle(document.querySelector('#app')).getPropertyValue(`--poly-${i}`)} ${getComputedStyle(
+              document.querySelector('#app'),
+            ).getPropertyValue(`--poly-${i + 1}`)}`,
+          );
+          i++;
+        }
+        return points.join(', ');
+      };
+
+      const app = document.querySelector('#app');
+      const polygon = document.querySelector('.polygon');
+
+      const update = () => {
+        const res = `clip-path: polygon(${makePoints()});`;
+        polygon.style = res;
+        document.querySelector('pre code').innerHTML = res;
+      };
+      update();
+
+      const button = document.createElement('button');
+      const buttonPlay = document.createElement('button');
+      const buttonStop = document.createElement('button');
+
+      button.innerHTML = 'Update';
+      button.addEventListener('click', update);
+
+      buttonPlay.innerHTML = 'Play';
+      buttonPlay.addEventListener('click', () => {
+        const interval = setInterval(() => {
+          update();
+        }, 500);
+        buttonPlay.addEventListener('click', () => {
+          buttonPlay.innerHTML = 'Play';
+          clearInterval(interval);
+        });
+        buttonStop.addEventListener('click', () => {
+          clearInterval(interval);
+        });
+      });
+
+      buttonStop.innerHTML = 'Stop';
+
+      app.appendChild(buttonStop);
+      app.appendChild(buttonPlay);
+      app.appendChild(button);
+    </script>
+  </body>
+</html>
