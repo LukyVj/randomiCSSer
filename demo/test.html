@@ -134,8 +134,8 @@
                 .join(', ')}
               )`;
           div.style.mixBlendMode = `var(--blend-mode-${i})`;
-          div.style.outline = `var(--border-${i}) solid rgb(var(--rgb-r-${i}-${i}) var(--rgb-g-${i}-${i}) var(--rgb-b-${i}-${i}))`;
-          div.style.outlineOffset = `var(--offset-${i / 2})`;
+          // div.style.outline = `var(--border-${i}) solid rgb(var(--rgb-r-${i}-${i}) var(--rgb-g-${i}-${i}) var(--rgb-b-${i}-${i}))`;
+          // div.style.outlineOffset = `var(--offset-${i / 2})`;
 
           div.innerHTML = i;
           // append the div to the app
