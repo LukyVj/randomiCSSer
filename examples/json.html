@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>randomicsser - Example basic</title>
+  </head>
+
+  <style>
+    pre {
+      white-space: pre-wrap;
+
+      /* style pre like a code samplel */
+      background: #f6f8fa;
+      padding: 1em;
+      border-radius: 3px;
+
+      /* style the code */
+      color: #24292e;
+      font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+      font-size: 85%;
+      line-height: 1.45;
+      overflow: auto;
+      tab-size: 4;
+      -webkit-hyphens: none;
+      -moz-hyphens: none;
+      -ms-hyphens: none;
+      hyphens: none;
+
+      /* style the code block */
+      margin: 0;
+      padding: 1em;
+      border: 1px solid #e1e4e8;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <pre><code>// Result of the randomCSSValiable().getVars()
+
+</code></pre>
+    </div>
+
+    <script type="module">
+      import randomCSSVariable from '../lib/index.module.js';
+
+      document.querySelector('pre code').innerHTML =
+        document.querySelector('pre code').innerHTML +
+        JSON.stringify(
+          randomCSSVariable({
+            target: document.querySelector('#app'),
+            amount: 300,
+            unit: 'px',
+            variable: 'random',
+            range: {
+              round: true,
+              min: 100,
+              max: 300,
+            },
+          }).getVars(),
+        );
+    </script>
+  </body>
+</html>

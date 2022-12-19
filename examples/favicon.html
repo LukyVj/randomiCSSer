@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='var(--favicon-color)'/%3E%3C/svg%3E"
+    />
+    <title>randomicsser - Example favicon</title>
+  </head>
+  <body>
+    <h2>Watch the favicon change color when you refresh the page.</h2>
+    <script type="module">
+      import randomCSSVariable from '../lib/index.module.js';
+      randomCSSVariable({
+        target: document.querySelector('body'),
+        amount: 3,
+        unit: '',
+        variable: 'random',
+        range: {
+          round: true,
+          min: 1,
+          max: 255,
+        },
+      }).load();
+
+      const faviconColor = `rgb(${getComputedStyle(document.querySelector('body')).getPropertyValue(
+        '--random-0',
+      )} ${getComputedStyle(document.querySelector('body')).getPropertyValue('--random-1')} ${getComputedStyle(
+        document.querySelector('body'),
+      ).getPropertyValue('--random-2')})`;
+
+      document
+        .querySelector('link[rel="icon"]')
+        .setAttribute(
+          'href',
+          `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='100%25' height='100%25' fill='${faviconColor.toString()}'/%3E%3C/svg%3E`,
+        );
+    </script>
+  </body>
+</html>

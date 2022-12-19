@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>randomicsser - Example basic</title>
+  </head>
+  <style>
+    header h1 span:nth-child(1) {
+      font-size: calc(var(--fsz-0) * 1px);
+    }
+    header h1 span:nth-child(2) {
+      font-size: calc(var(--fsz-1) * 1px);
+    }
+    header h1 span:nth-child(3) {
+      font-size: calc(var(--fsz-2) * 1px);
+    }
+    header h1 span:nth-child(4) {
+      font-size: calc(var(--fsz-3) * 1px);
+    }
+    header h1 span:nth-child(5) {
+      font-size: calc(var(--fsz-4) * 1px);
+    }
+    header h1 span:nth-child(6) {
+      font-size: calc(var(--fsz-5) * 1px);
+    }
+    header h1 span:nth-child(7) {
+      font-size: calc(var(--fsz-6) * 1px);
+    }
+    header h1 span:nth-child(8) {
+      font-size: calc(var(--fsz-7) * 1px);
+    }
+    header h1 span:nth-child(9) {
+      font-size: calc(var(--fsz-8) * 1px);
+    }
+    header h1 span:nth-child(10) {
+      font-size: calc(var(--fsz-9) * 1px);
+    }
+    header h1 span:nth-child(11) {
+      font-size: calc(var(--fsz-10) * 1px);
+    }
+    header h1 span:nth-child(12) {
+      font-size: calc(var(--fsz-11) * 1px);
+    }
+    header h1 span:nth-child(13) {
+      font-size: calc(var(--fsz-12) * 1px);
+    }
+    header h1 span:nth-child(14) {
+      font-size: calc(var(--fsz-13) * 1px);
+    }
+    header h1 span:nth-child(15) {
+      font-size: calc(var(--fsz-14) * 1px);
+    }
+    header h1 span:nth-child(16) {
+      font-size: calc(var(--fsz-15) * 1px);
+    }
+    header h1 span:nth-child(17) {
+      font-size: calc(var(--fsz-16) * 1px);
+    }
+    header h1 span:nth-child(18) {
+      font-size: calc(var(--fsz-17) * 1px);
+    }
+    header h1 span:nth-child(19) {
+      font-size: calc(var(--fsz-18) * 1px);
+    }
+  </style>
+  <body>
+    <div id="app">
+      <header class="container">
+        <h1>
+          <span>R</span><span>a</span><span>n</span><span>d</span><span>o</span><span>m</span>&nbsp;<span></span
+          ><span>C</span><span>S</span><span>S</span>&nbsp;<span>v</span><span>a</span><span>r</span><span>i</span
+          ><span>a</span><span>b</span><span>l</span><span>e</span><span>s</span>
+        </h1>
+      </header>
+    </div>
+
+    <pre>
+      <code>
+import randomCSSVariable from '../lib/index.module.js';
+
+randomCSSVariable({
+  variable: 'fsz',
+  amount: document.querySelector('header h1').childNodes.length,
+  range: { min: 20, max: 52, round: true },
+}).load();
+      </code>
+    </pre>
+    <script type="module">
+      import randomCSSVariable from '../lib/index.module.js';
+
+      randomCSSVariable({
+        variable: 'fsz',
+        amount: document.querySelector('header h1').childNodes.length,
+        range: { min: 20, max: 52, round: true },
+      }).load();
+    </script>
+  </body>
+</html>

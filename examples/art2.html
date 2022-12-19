@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      #app {
+      }
+
+      #app div {
+        min-height: 400px;
+        max-width: 400px;
+        border-radius: 500px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="probe"></div>
+    </div>
+
+    <script type="module">
+      import randomCSSVariables from '../lib/index.module.js';
+
+      const gradientType = ['linear-gradient', 'radial-gradient', 'conic-gradient'];
+
+      const load = (i) => {
+        console.log(i);
+        const r = Array.from({ length: 50 }).map((_, index) => ({
+          variable: `rgb-r-${index}`,
+          amount: 10,
+          target: document.querySelector('#app'),
+          range: { min: 1, max: 255, round: true },
+        }));
+        const g = Array.from({ length: 50 }).map((_, index) => ({
+          variable: `rgb-g-${index}`,
+          amount: 10,
+          target: document.querySelector('#app'),
+          range: { min: 1, max: 255, round: true },
+        }));
+        const b = Array.from({ length: 50 }).map((_, index) => ({
+          variable: `rgb-b-${index}`,
+          amount: 10,
+          target: document.querySelector('#app'),
+          range: { min: 1, max: 255, round: true },
+        }));
+
+        randomCSSVariables([
+          {
+            variable: 'position',
+            amount: 3,
+            target: document.querySelector('#app'),
+            range: { min: 0, max: 100, round: true },
+            unit: '%',
+          },
+          ...r,
+          ...g,
+          ...b,
+        ]).load();
+
+        // create a new div
+        const div = document.getElementById('probe');
+        // set the innerHTML to the index
+
+        const makeGradient = (type) => `
+          ${type}(
+              ${Array.from({ length: 50 })
+                .map((_, index) => `rgb(var(--rgb-r-${index}-1) var(--rgb-g-${index}-1) var(--rgb-b-${index}-1))`)
+                .join(', ')},
+                ${Array.from({ length: 50 })
+                  .map((_, index) => `rgb(var(--rgb-r-${index}-1) var(--rgb-g-${index}-1) var(--rgb-b-${index}-1))`)
+                  .join(', ')}
+              )`;
+
+        div.style.margin = '0 auto';
+        div.style.width = `100%`;
+        div.style.height = 'calv(100vh / 2)';
+        div.style.textAlign = 'center';
+        div.style.lineHeight = '100px';
+        div.style.transition = 'background-image 0.5s ease';
+        div.style.backgroundImage = makeGradient(gradientType[i]);
+        div.style.mixBlendMode = `var(--blend-mode-1)`;
+
+        document.querySelector('#app').appendChild(div);
+      };
+      window.load = load;
+      load(0);
+    </script>
+
+    <div>
+      <button onclick="window.load(0)">Linear</button>
+      <button onclick="window.load(1)">Radial</button>
+      <button onclick="window.load(2)">Conic</button>
+    </div>
+  </body>
+</html>
