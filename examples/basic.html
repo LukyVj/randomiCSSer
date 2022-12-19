@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>randomicsser - Example basic</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>--random-0: <span id="result_0"></span></div>
+      <div>--random-1: <span id="result_1"></span></div>
+      <div>--random-2: <span id="result_2"></span></div>
+    </div>
+
+    <pre>
+      <code>
+import randomCSSVariable from '../lib/index.module.js';
+randomCSSVariable({
+  target: document.querySelector('#app'),
+  amount: 3,
+  unit: 'px',
+  variable: 'random',
+  range: {
+    round: true,
+    min: 100,
+    max: 300,
+  },
+}).load();
+      </code>
+    </pre>
+    <script type="module">
+      import randomCSSVariable from '../lib/index.module.js';
+      randomCSSVariable({
+        target: document.querySelector('#app'),
+        amount: 3,
+        unit: 'px',
+        variable: 'random',
+        range: {
+          round: true,
+          min: 100,
+          max: 300,
+        },
+      }).load();
+
+      document.querySelector('#result_0').innerHTML = getComputedStyle(document.querySelector('#app')).getPropertyValue(
+        '--random-0',
+      );
+      document.querySelector('#result_1').innerHTML = getComputedStyle(document.querySelector('#app')).getPropertyValue(
+        '--random-1',
+      );
+      document.querySelector('#result_2').innerHTML = getComputedStyle(document.querySelector('#app')).getPropertyValue(
+        '--random-2',
+      );
+    </script>
+  </body>
+</html>

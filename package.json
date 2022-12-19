@@ -56,6 +56,7 @@
   "dependencies": {
     "@types/marked": "^4.0.8",
     "jsdom": "^20.0.3",
-    "randomicsser": "^1.0.10"
+    "randomicsser": "^1.0.10",
+    "to-esm": "^2.26.3"
   }
 }

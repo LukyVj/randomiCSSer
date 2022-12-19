@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>randomicsser - Example black and white</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="probe"></div>
+    </div>
+
+    <script type="module">
+      import randomCSSVariable from '../lib/index.module.js';
+
+      window.amount = 100;
+
+      const fire = (i) => {
+        const amount = window.amount ? window.amount : 10;
+        if (i === undefined) {
+          i = 0;
+        }
+        const type = ['linear-gradient', 'radial-gradient', 'conic-gradient'][i];
+        randomCSSVariable({
+          target: document.querySelector('#app'),
+          amount,
+          unit: '',
+          variable: 'random',
+          values: ['black', 'white'],
+        }).load();
+
+        const makeGradient = (type) => {
+          const gradient = [];
+          for (let i = 0; i < amount; i++) {
+            gradient.push(`var(--random-${i})`);
+          }
+          return `${type}(${gradient.join(', ')})`;
+        };
+
+        const probe = document.querySelector('#probe');
+        const probeStyle = {
+          width: '500px',
+          height: '500px',
+          border: '1px solid black',
+          display: 'inline-block',
+          background: makeGradient(type),
+        };
+
+        Object.keys(probeStyle).forEach((key) => {
+          probe.style[key] = probeStyle[key];
+        });
+      };
+
+      fire();
+
+      window.fire = fire;
+      document.querySelector('#app').addEventListener('click', () => {
+        fire();
+      });
+    </script>
+
+    <div>
+      <input
+        type="number"
+        value="10"
+        id="amount"
+        onChange="window.amount=this.value;window.fire(0)"
+        onload="this.value=window.amount;"
+      />
+      <button onclick="window.fire(0)">linear</button>
+      <button onclick="window.fire(1)">radial</button>
+      <button onclick="window.fire(2)">conic</button>
+    </div>
+  </body>
+</html>
