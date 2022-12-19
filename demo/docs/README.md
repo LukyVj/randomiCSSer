@@ -1,12 +1,10 @@
+randomicsser / [Exports](modules.md)
+
 # RandomiCSSer
 
 RadomiCSSer is a small utility function that will create CSS variables with random values.
 
 From CSS art, to experiments, we all need random values sometimes. With this utility function you can create random CSS variables and use them in your CSS or JS.
-
-## Docs
-
-[Exports](docs/modules.md)
 
 ## Installation
 

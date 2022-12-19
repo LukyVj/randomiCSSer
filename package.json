@@ -24,7 +24,7 @@
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md && npm run format && git add -A src",
     "postversion": "git push && git push --tags",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "docs": "jsdoc -c jsdoc.json ./src/index.ts -d docs"
+    "docs": "npx typedoc --out docs src/index.ts && cat docs/readme.md | npx marked > docs/readme.html && cat docs/modules.md | npx marked > docs/modules.html && cp -R docs demo"
   },
   "repository": {
     "type": "git",
@@ -54,6 +54,7 @@
     "lib/**/*"
   ],
   "dependencies": {
+    "@types/marked": "^4.0.8",
     "jsdom": "^20.0.3",
     "randomicsser": "^1.0.10"
   }
