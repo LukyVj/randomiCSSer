@@ -1,5 +1,4 @@
 /**
- *# @preserve version:#version#
  * RandomCSSVariable
  * @version#version#
  * @license MIT
