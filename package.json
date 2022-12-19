@@ -14,7 +14,7 @@
   "unpkg": "./lib/index.umd.js",
   "scripts": {
     "test": "jest --config jestconfig.json",
-    "build": "microbundle && sh scripts/version.sh && cp -R lib demo",
+    "build": "microbundle && sh scripts/version.sh && cp -R lib demo && cp -R lib docs",
     "dev": "microbundle watch",
     "format": "prettier --write \"src/**/*.ts\"",
     "lint": "tslint -p tsconfig.json",
@@ -23,7 +23,8 @@
     "preversion": "npm run lint",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s && git add CHANGELOG.md && npm run format && git add -A src",
     "postversion": "git push && git push --tags",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "docs": "jsdoc -c jsdoc.json ./src/index.ts -d docs"
   },
   "repository": {
     "type": "git",
@@ -40,10 +41,13 @@
     "@types/jest": "^29.2.4",
     "fs": "^0.0.1-security",
     "jest": "^29.3.1",
+    "jsdoc": "^4.0.0",
     "prettier": "^2.8.1",
     "ts-jest": "^29.0.3",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
+    "typedoc": "^0.23.23",
+    "typedoc-plugin-markdown": "^3.14.0",
     "typescript": "^4.9.4"
   },
   "files": [
