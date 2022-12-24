@@ -1,4 +1,4 @@
-interface RandomCSSVariableProps {
+export interface RandomCSSVariableProps {
     /** The name of the CSS variable */
     variable?: string;
     /** The unit of the CSS variable */
@@ -27,6 +27,7 @@ interface RandomCSSVariableProps {
  */
 declare const randomCSSVariable: (opts?: RandomCSSVariableProps | RandomCSSVariableProps[]) => {
     load: (dom?: boolean) => void;
-    getVars: (i?: number) => any;
+    getVars: () => string;
+    getVarsJSON: (i?: number) => any;
 };
 export default randomCSSVariable;

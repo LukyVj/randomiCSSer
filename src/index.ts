@@ -149,7 +149,7 @@ const randomCSSVariable = (
     return JSON.parse(`[${result}]`);
   };
 
-  return { load, getVarsJSON };
+  return { load, getVars, getVarsJSON };
 };
 
 export default randomCSSVariable;
