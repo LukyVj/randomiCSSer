@@ -1,4 +1,4 @@
-interface RandomCSSVariableProps {
+export interface RandomCSSVariableProps {
   /** The name of the CSS variable */
   variable?: string;
   /** The unit of the CSS variable */
@@ -20,6 +20,12 @@ interface RandomCSSVariableProps {
   values?: any[];
 }
 
+/**
+ * It generates random CSS variables and applies them to the DOM
+ * @param {RandomCSSVariableProps | RandomCSSVariableProps[]} opts - RandomCSSVariableProps |
+ * RandomCSSVariableProps[] = {
+ * @returns A function that returns an object with two methods: load and getVars.
+ */
 const randomCSSVariable = (
   opts: RandomCSSVariableProps | RandomCSSVariableProps[] = {
     amount: 3,
@@ -38,6 +44,15 @@ const randomCSSVariable = (
   const options = IS_ARRAY ? opts : [opts];
   const GLOBAL_VARS: string[] = [];
 
+  /**
+   * It returns a random number between a minimum and maximum value, or a random value from an array of
+   * values
+   * @param {number} min - The minimum value of the range
+   * @param {number} max - The maximum value of the range.
+   * @param {boolean} round - boolean - if true, the random number will be rounded to the nearest integer
+   * @param {number} index - The index of the current iteration.
+   * @returns A random number between min and max.
+   */
   const value = (min: number, max: number, round: boolean, index: number) => {
     const VALUES = IS_ARRAY ? opts[index].values : opts.values;
 
@@ -52,6 +67,10 @@ const randomCSSVariable = (
     }
   };
 
+  /**
+   * It generates a random number, then assigns it to a CSS variable
+   * @param  - `amount` - The amount of random variables to generate.
+   */
   const generate = ({
     amount = 3,
     variable = 'random',
@@ -90,6 +109,10 @@ const randomCSSVariable = (
     GLOBAL_VARS.push(ALL_VARS.join(','));
   };
 
+  /**
+   * It takes an array of options, and for each option, it generates a new variable
+   * @param {boolean} [dom] - boolean - whether or not to generate the DOM elements.
+   */
   const load = (dom?: boolean) => {
     options.map(({ variable, unit, amount, target, range, values }, index: number) => {
       generate({
@@ -105,13 +128,28 @@ const randomCSSVariable = (
     });
   };
 
-  const getVars = (i?: number) => {
+  /**
+   * It returns a string of all the global variables in the current scope
+   * @returns A string of the global variables.
+   */
+  const getVars = () => {
+    load(false);
+    return GLOBAL_VARS.join(';');
+  };
+
+  /**
+   * It returns an array of all the global variables in the current scope
+   * @param {number} [i] - The index of the variable you want to get. If you don't specify this, it will
+   * return all of the variables.
+   * @returns An array of the global variables.
+   */
+  const getVarsJSON = (i?: number) => {
     load(false);
     const result = i ? GLOBAL_VARS[i] : GLOBAL_VARS.join(',');
     return JSON.parse(`[${result}]`);
   };
 
-  return { load, getVars };
+  return { load, getVarsJSON };
 };
 
 export default randomCSSVariable;

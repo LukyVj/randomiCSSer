@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>randomicsser - Example visuals-sound</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      #visual {
+        display: grid;
+        place-items: center;
+        width: 100vw;
+        height: 100vh;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      #visual div {
+        background-color: #000;
+        width: calc(100vw / 3);
+        height: calc(100vh / 3);
+        transition: all 0.5s ease-in-out;
+        aspect-ratio: 1 / 1;
+        will-change: background-image;
+      }
+
+      body {
+        display: grid;
+        place-items: center;
+        width: 100vw;
+        height: 100vh;
+        grid-template-columns: repeat(6, 1fr);
+      }
+
+      #app {
+        height: 100%;
+      }
+
+      .controls {
+        background-color: #ccc;
+        height: 100%;
+        padding: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="controls">
+      <table>
+        <tr>
+          <td><label for="iterations">iterations</label></td>
+          <td>
+            <input type="number" id="iterations" value="5" min="0" max="1" step="0.1" />
+          </td>
+        </tr>
+        <tr>
+          <td><label for="merging">Merging</label></td>
+          <td>
+            <button id="merge">Merge</button>
+            <button id="unmerge">Unmerge</button>
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="blend-modes">Blend mode</label>
+          </td>
+          <td>
+            <select id="blend-modes" onchange="window.visuals.blendMode = this.value">
+              <option value="normal">normal</option>
+              <option value="multiply">multiply</option>
+              <option value="screen">screen</option>
+              <option value="overlay">overlay</option>
+              <option value="darken">darken</option>
+              <option value="lighten">lighten</option>
+              <option value="color-dodge">color-dodge</option>
+              <option value="color-burn">color-burn</option>
+              <option value="hard-light">hard-light</option>
+              <option value="soft-light">soft-light</option>
+              <option value="difference">difference</option>
+              <option value="exclusion">exclusion</option>
+              <option value="hue">hue</option>
+              <option value="saturation">saturation</option>
+              <option value="color">color</option>
+              <option value="luminosity">luminosity</option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Scene color</td>
+          <td>
+            <input type="color" id="scene-color" value="#000" />
+          </td>
+        </tr>
+        <tr>
+          <td>colors</td>
+          <td>
+            <input type="color" id="color1" value="#000" />
+            <input type="color" id="color2" value="#fff" />
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="full-size">Full-size</label>
+          </td>
+          <td>
+            <input type="checkbox" id="full-size" />
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div id="app">
+      <div id="visual">
+        <div class="conic"></div>
+        <div class="linear"></div>
+        <div class="radial"></div>
+      </div>
+    </div>
+
+    <script type="module">
+      import randomCSSVariable from 'https://unpkg.com/randomicsser@1.0.13/lib/index.module.js';
+      window.randomCSSVariable = randomCSSVariable;
+
+      const AMOUNT = 200;
+      const APP = document.querySelector('#app');
+
+      const onMicrophoneGranted = async (stream) => {
+        const audioContext = new AudioContext();
+        await audioContext.audioWorklet.addModule('./js/random-noise-processor.js');
+        let microphone = audioContext.createMediaStreamSource(stream);
+
+        const node = new AudioWorkletNode(audioContext, 'random-noise-processor');
+        node.port.onmessage = (event) => {
+          let _volume = 0;
+          let _sensibility = 5;
+          if (event.data.volume !== undefined) {
+            _volume = event.data.volume;
+            const threshold = (_volume * 100) / _sensibility;
+            if (threshold > 1) {
+              fire(window.visuals.iterations, window.visuals.colors);
+              update();
+            }
+          }
+        };
+        microphone.connect(node).connect(audioContext.destination);
+      };
+
+      const onMicrophoneDenied = () => {
+        console.log('denied');
+      };
+
+      const fire = (iterations, colors) => {
+        console.log(iterations);
+        randomCSSVariable({
+          target: APP,
+          amount: iterations ? iterations : AMOUNT,
+          unit: '',
+          variable: 'random',
+          values: colors
+            ? [colors[0], colors[1]]
+            : [
+                '#F0F8FF',
+                '#FAEBD7',
+                '#00FFFF',
+                '#7FFFD4',
+                '#F0FFFF',
+                '#F5F5DC',
+                '#FFE4C4',
+                '#000000',
+                '#FFEBCD',
+                '#0000FF',
+                '#8A2BE2',
+                '#A52A2A',
+                '#DEB887',
+                '#5F9EA0',
+                '#7FFF00',
+                '#D2691E',
+                '#FF7F50',
+                '#6495ED',
+                '#FFF8DC',
+                '#DC143C',
+                '#00FFFF',
+                '#00008B',
+                '#008B8B',
+                '#B8860B',
+                '#A9A9A9',
+                '#006400',
+                '#BDB76B',
+                '#8B008B',
+                '#556B2F',
+                '#FF8C00',
+                '#9932CC',
+                '#8B0000',
+                '#E9967A',
+                '#8FBC8F',
+                '#483D8B',
+                '#2F4F4F',
+                '#00CED1',
+                '#9400D3',
+                '#FF1493',
+                '#00BFFF',
+                '#696969',
+                '#1E90FF',
+                '#B22222',
+                '#FFFAF0',
+                '#228B22',
+                '#FF00FF',
+                '#DCDCDC',
+                '#F8F8FF',
+                '#FFD700',
+                '#DAA520',
+                '#808080',
+                '#008000',
+                '#ADFF2F',
+                '#F0FFF0',
+                '#FF69B4',
+                '#CD5C5C',
+                '#4B0082',
+                '#FFFFF0',
+                '#F0E68C',
+                '#E6E6FA',
+                '#FFF0F5',
+                '#7CFC00',
+                '#FFFACD',
+                '#ADD8E6',
+                '#F08080',
+                '#E0FFFF',
+                '#FAFAD2',
+                '#D3D3D3',
+                '#90EE90',
+                '#FFB6C1',
+                '#FFA07A',
+                '#20B2AA',
+                '#87CEFA',
+                '#778899',
+                '#B0C4DE',
+                '#FFFFE0',
+                '#00FF00',
+                '#32CD32',
+                '#FAF0E6',
+                '#FF00FF',
+                '#800000',
+                '#66CDAA',
+                '#0000CD',
+                '#BA55D3',
+                '#9370D8',
+                '#3CB371',
+                '#7B68EE',
+                '#00FA9A',
+                '#48D1CC',
+                '#C71585',
+                '#191970',
+                '#F5FFFA',
+                '#FFE4E1',
+                '#FFE4B5',
+                '#FFDEAD',
+                '#000080',
+                '#FDF5E6',
+                '#808000',
+                '#6B8E23',
+                '#FFA500',
+                '#FF4500',
+                '#DA70D6',
+                '#EEE8AA',
+                '#98FB98',
+                '#AFEEEE',
+                '#D87093',
+                '#FFEFD5',
+                '#FFDAB9',
+                '#CD853F',
+                '#FFC0CB',
+                '#DDA0DD',
+                '#B0E0E6',
+                '#800080',
+                '#FF0000',
+                '#BC8F8F',
+                '#4169E1',
+                '#8B4513',
+                '#FA8072',
+                '#F4A460',
+                '#2E8B57',
+                '#FFF5EE',
+                '#A0522D',
+                '#C0C0C0',
+                '#87CEEB',
+                '#6A5ACD',
+                '#708090',
+                '#FFFAFA',
+                '#00FF7F',
+                '#4682B4',
+                '#D2B48C',
+                '#008080',
+                '#D8BFD8',
+                '#FF6347',
+                '#40E0D0',
+                '#EE82EE',
+                '#F5DEB3',
+                '#FFFFFF',
+                '#F5F5F5',
+                '#FFFF00',
+                '#9ACD32',
+              ],
+        }).load();
+      };
+      const makeGradient = (type, iterations) => {
+        const gradient = [];
+        for (let i = 0; i < iterations; i++) {
+          gradient.push(`var(--random-${i})`);
+        }
+        return `${type}(${gradient.join(', ')})`;
+      };
+
+      const visual = document.querySelector('#visual');
+      const conic = document.querySelector('.conic');
+      const linear = document.querySelector('.linear');
+      const radial = document.querySelector('.radial');
+
+      const update = () => {
+        conic.style.backgroundImage = makeGradient('conic-gradient', window.visuals.iterations);
+        linear.style.backgroundImage = makeGradient('linear-gradient', window.visuals.iterations);
+        radial.style.backgroundImage = makeGradient('radial-gradient', window.visuals.iterations);
+      };
+
+      window.addEventListener('load', () => {
+        window.visuals = {
+          colors: ['#000', '#fff'],
+          iterations: AMOUNT,
+        };
+        fire();
+        update();
+
+        try {
+          navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+          navigator.getUserMedia({ audio: true, video: false }, onMicrophoneGranted, onMicrophoneDenied);
+        } catch (e) {
+          alert(e);
+        }
+
+        const sceneColor = document.querySelector('#scene-color');
+        const merge = document.querySelector('#merge');
+        const unmerge = document.querySelector('#unmerge');
+        const blendModes = document.querySelector('#blend-modes');
+        const color1 = document.querySelector('#color1');
+        const color2 = document.querySelector('#color2');
+        const fullSize = document.querySelector('#full-size');
+        const iterations = document.querySelector('#iterations');
+
+        iterations.addEventListener('change', (e) => {
+          const value = e.target.value;
+          window.visuals.iterations = value;
+        });
+
+        fullSize.addEventListener('change', (e) => {
+          [conic, linear, radial].forEach((el) => {
+            if (e.target.checked) {
+              el.style.minWidth = '100%';
+              el.style.minHeight = '100%';
+            } else {
+              el.style.minWidth = '0';
+              el.style.minHeight = '0';
+            }
+          });
+        });
+
+        sceneColor.addEventListener('change', (e) => {
+          APP.style.background = e.target.value;
+        });
+
+        merge.addEventListener('click', () => {
+          [conic, linear, radial].forEach((el) => {
+            el.style.position = 'absolute';
+            el.style.mixBlendMode = window.visuals.blendMode;
+          });
+        });
+
+        unmerge.addEventListener('click', () => {
+          const conic = document.querySelector('.conic');
+          const linear = document.querySelector('.linear');
+          const radial = document.querySelector('.radial');
+
+          [conic, linear, radial].forEach((el) => {
+            el.style.position = 'relative';
+            el.style.mixBlendMode = 'normal';
+          });
+        });
+
+        blendModes.addEventListener('change', (e) => {
+          window.visuals.blendMode = e.target.value;
+          [conic, linear, radial].forEach((el) => {
+            el.style.mixBlendMode = window.visuals.blendMode;
+          });
+        });
+
+        color1.addEventListener('input', (e) => {
+          window.visuals.colors[0] = e.target.value;
+          fire(window.visuals.iterations, [e.target.value, document.querySelector('#color2').value]);
+          update();
+        });
+
+        color2.addEventListener('input', (e) => {
+          window.visuals.colors[1] = e.target.value;
+          fire(window.visuals.iterations, [document.querySelector('#color1').value, e.target.value]);
+          update();
+        });
+      });
+    </script>
+  </body>
+</html>
