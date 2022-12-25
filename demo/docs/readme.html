@@ -1,14 +1,22 @@
 <p>randomicsser / <a href="modules.md">Exports</a></p>
 <h1 id="randomicsser">RandomiCSSer</h1>
 <p>RadomiCSSer is a small utility function that will create CSS variables with random values.</p>
-<p>From CSS art, to experiments, we all need random values sometimes. With this utility function you can create random CSS variables and use them in your CSS or JS.</p>
+<p>
+  From CSS art, to experiments, we all need random values sometimes. With this utility function you can create random
+  CSS variables and use them in your CSS or JS.
+</p>
 <h2 id="installation">Installation</h2>
 <pre><code class="language-bash">npm i randomicsser
 </code></pre>
 <h2 id="usage">Usage</h2>
-<p>In order to be able to use the variables in your CSS, you need to load them first. You can do this by calling the <code>load</code> method.</p>
-<p>Then, you&#39;ll find the variables in your CSS, right onto your <code>target</code> element.
-If the target prop isn&#39;t filled, it will default on the <code>body</code>.</p>
+<p>
+  In order to be able to use the variables in your CSS, you need to load them first. You can do this by calling the
+  <code>load</code> method.
+</p>
+<p>
+  Then, you&#39;ll find the variables in your CSS, right onto your <code>target</code> element. If the target prop
+  isn&#39;t filled, it will default on the <code>body</code>.
+</p>
 <p>By default, you&#39;ll see this on the body:</p>
 <pre><code class="language-html">&lt;body
   style=&quot;
@@ -42,7 +50,7 @@ If the target prop isn&#39;t filled, it will default on the <code>body</code>.</
       randomCSSVariable({
         variable: &#39;random&#39;,
         unit: &#39;&#39;,
-        amount: 10,
+        count: 10,
         range: { min: 1, max: 300, round: true },
       }).load();
     &lt;/script&gt;
@@ -54,7 +62,7 @@ If the target prop isn&#39;t filled, it will default on the <code>body</code>.</
 <pre><code class="language-js">const App = () =&gt; {
   randomCSSVariable({
     target: document.querySelector(&#39;body&#39;),
-    amount: 10,
+    count: 10,
     unit: &#39;px&#39;,
     variable: &#39;random&#39;,
     range: {
@@ -85,7 +93,7 @@ If the target prop isn&#39;t filled, it will default on the <code>body</code>.</
 import fs from &#39;fs&#39;;
 
 const randCSS = randomCSSVariable({
-  amount: 10,
+  count: 10,
   range: {
     min: 1,
     max: 100,
@@ -94,4 +102,3 @@ const randCSS = randomCSSVariable({
 
 fs.writeFileSync(&#39;./demo/randomicsser.json&#39;, JSON.stringify(randCSS), null, 2);
 </code></pre>
-

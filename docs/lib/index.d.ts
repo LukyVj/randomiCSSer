@@ -4,7 +4,7 @@ export interface RandomCSSVariableProps {
     /** The unit of the CSS variable */
     unit?: string;
     /** The amount of CSS variables */
-    amount?: number;
+    count?: number;
     /** The target element to apply the CSS variables */
     target?: HTMLBodyElement | null;
     /** The range of the CSS variable */
@@ -27,7 +27,7 @@ export interface RandomCSSVariableProps {
  */
 declare const randomCSSVariable: (opts?: RandomCSSVariableProps | RandomCSSVariableProps[]) => {
     load: (dom?: boolean) => void;
-    getVars: () => string;
-    getVarsJSON: (i?: number) => any;
+    getVars: (count?: number) => string;
+    getVarsJSON: () => any;
 };
 export default randomCSSVariable;

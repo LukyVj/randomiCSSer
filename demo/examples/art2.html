@@ -31,19 +31,19 @@
         console.log(i);
         const r = Array.from({ length: 50 }).map((_, index) => ({
           variable: `rgb-r-${index}`,
-          amount: 10,
+          count: 10,
           target: document.querySelector('#app'),
           range: { min: 1, max: 255, round: true },
         }));
         const g = Array.from({ length: 50 }).map((_, index) => ({
           variable: `rgb-g-${index}`,
-          amount: 10,
+          count: 10,
           target: document.querySelector('#app'),
           range: { min: 1, max: 255, round: true },
         }));
         const b = Array.from({ length: 50 }).map((_, index) => ({
           variable: `rgb-b-${index}`,
-          amount: 10,
+          count: 10,
           target: document.querySelector('#app'),
           range: { min: 1, max: 255, round: true },
         }));
@@ -51,7 +51,7 @@
         randomCSSVariables([
           {
             variable: 'position',
-            amount: 3,
+            count: 3,
             target: document.querySelector('#app'),
             range: { min: 0, max: 100, round: true },
             unit: '%',

@@ -1,3 +1,7 @@
+# [1.1.0](https://github.com/LukyVj/randomiCSSer/compare/v1.0.13...v1.1.0) (2022-12-25)
+
+
+
 ## [1.0.13](https://github.com/LukyVj/randomiCSSer/compare/v1.0.11...v1.0.13) (2022-12-18)
 
 ### Features

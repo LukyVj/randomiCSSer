@@ -82,7 +82,7 @@ import randomCSSVariable from 'https://unpkg.com/randomicsser@1.0.13/lib/index.m
 
 randomCSSVariable({
   variable: 'fsz',
-  amount: document.querySelector('header h1').childNodes.length,
+  count: document.querySelector('header h1').childNodes.length,
   range: { min: 20, max: 52, round: true },
 }).load();
       </code>
@@ -92,7 +92,7 @@ randomCSSVariable({
 
       randomCSSVariable({
         variable: 'fsz',
-        amount: document.querySelector('header h1').childNodes.length,
+        count: document.querySelector('header h1').childNodes.length,
         range: { min: 20, max: 52, round: true },
       }).load();
     </script>

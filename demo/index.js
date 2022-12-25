@@ -4,7 +4,7 @@ import randomCSSVariable from 'randomicsser';
 import fs from 'fs';
 
 const randCSS = randomCSSVariable({
-  amount: 10,
+  count: 10,
   range: {
     min: 1,
     max: 100,
