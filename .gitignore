@@ -21,6 +21,7 @@
 *.pem
 __mocks__
 .npmrc
+benchmark.js
 
 
 # debug
@@ -38,3 +39,4 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
