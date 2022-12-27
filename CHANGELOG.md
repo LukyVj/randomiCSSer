@@ -1,3 +1,13 @@
+# [1.2.0](https://github.com/LukyVj/randomiCSSer/compare/v1.1.0...v1.2.0) (2022-12-27)
+
+
+### Features
+
+* **1.2.0:** use getVars().css & getVars().json ([3ebd101](https://github.com/LukyVj/randomiCSSer/commit/3ebd1016ed342ac11c78d219b0929549269f5496))
+* **MISC:** v1.1.0 ([c35da00](https://github.com/LukyVj/randomiCSSer/commit/c35da003a5487387aba0fda38eb24f6780ef878d))
+
+
+
 # [1.1.0](https://github.com/LukyVj/randomiCSSer/compare/v1.0.13...v1.1.0) (2022-12-25)
 
 - **index:** changed `getVars()` to `getVarsJSON()`; `getVars` now returns a string
