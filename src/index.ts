@@ -152,16 +152,6 @@ const randomCSSVariable = (
       }
     }
 
-    return varStr;
-  };
-
-  /**
-   * It returns an array of all the global variables in the current scope
-   * @param {number} [i] - The index of the variable you want to get. If you don't specify this, it will
-   * return all of the variables.
-   * @returns An array of the global variables.
-   */
-  const getVarsJSON = () => {
     // Avoid calling the load function if it is not necessary
     if (GLOBAL_VARS.length === 0) {
       load(false);
@@ -175,10 +165,14 @@ const randomCSSVariable = (
       }
     }
     result += ']';
-    return JSON.parse(result);
+
+    return {
+      css: varStr,
+      json: JSON.parse(result),
+    };
   };
 
-  return { load, getVars, getVarsJSON };
+  return { load, getVars };
 };
 
 export default randomCSSVariable;
