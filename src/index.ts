@@ -1,10 +1,10 @@
-interface RandomCSSVariableProps {
+export interface RandomCSSVariableProps {
   /** The name of the CSS variable */
   variable?: string;
   /** The unit of the CSS variable */
   unit?: string;
   /** The amount of CSS variables */
-  amount?: number;
+  count?: number;
   /** The target element to apply the CSS variables */
   target?: HTMLBodyElement | null;
   /** The range of the CSS variable */
@@ -20,9 +20,15 @@ interface RandomCSSVariableProps {
   values?: any[];
 }
 
+/**
+ * It generates random CSS variables and applies them to the DOM
+ * @param {RandomCSSVariableProps | RandomCSSVariableProps[]} opts - RandomCSSVariableProps |
+ * RandomCSSVariableProps[] = {
+ * @returns A function that returns an object with two methods: load and getVars.
+ */
 const randomCSSVariable = (
   opts: RandomCSSVariableProps | RandomCSSVariableProps[] = {
-    amount: 3,
+    count: 3,
     variable: 'random',
     unit: '',
     range: {
@@ -38,6 +44,15 @@ const randomCSSVariable = (
   const options = IS_ARRAY ? opts : [opts];
   const GLOBAL_VARS: string[] = [];
 
+  /**
+   * It returns a random number between a minimum and maximum value, or a random value from an array of
+   * values
+   * @param {number} min - The minimum value of the range
+   * @param {number} max - The maximum value of the range.
+   * @param {boolean} round - boolean - if true, the random number will be rounded to the nearest integer
+   * @param {number} index - The index of the current iteration.
+   * @returns A random number between min and max.
+   */
   const value = (min: number, max: number, round: boolean, index: number) => {
     const VALUES = IS_ARRAY ? opts[index].values : opts.values;
 
@@ -52,8 +67,12 @@ const randomCSSVariable = (
     }
   };
 
+  /**
+   * It generates a random number, then assigns it to a CSS variable
+   * @param  - `count` - The count of random variables to generate.
+   */
   const generate = ({
-    amount = 3,
+    count = 3,
     variable = 'random',
     unit = '',
     range = {
@@ -68,10 +87,12 @@ const randomCSSVariable = (
     const root = target;
     const VAR_GROUP_VALUE: { [x: string]: string | number }[] = [];
     const VAR_GROUP = { [variable as string]: VAR_GROUP_VALUE };
-    const ALL_VARS: string[] = [];
 
-    Array.from({ length: amount! }).map((_, idx) => {
-      const VAR_NAME = amount === 1 ? `--${variable}` : `--${variable}-${idx}`;
+    // Pre-compute the length of the loop to avoid re-computing it on every iteration
+    const length = count!;
+
+    for (let i = 0; i < length; i++) {
+      const VAR_NAME = count === 1 ? `--${variable}` : `--${variable}-${i}`;
       const VAR_VALUE: string | number = unit
         ? `${value(range!.min!, range!.max!, range!.round!, index)}${unit}`
         : value(range!.min!, range!.max!, range!.round!, index);
@@ -82,36 +103,82 @@ const randomCSSVariable = (
       if (root && dom) {
         root.style.setProperty(`${VAR_NAME}`, `${VAR_VALUE}`);
       }
+    }
 
-      return null;
-    });
-
-    ALL_VARS.push(JSON.stringify(VAR_GROUP));
-    GLOBAL_VARS.push(ALL_VARS.join(','));
+    GLOBAL_VARS.push(JSON.stringify(VAR_GROUP));
   };
 
+  /**
+   * It takes an array of options, and for each option, it generates a new variable
+   * @param {boolean} [dom] - boolean - whether or not to generate the DOM elements.
+   */
   const load = (dom?: boolean) => {
-    options.map(({ variable, unit, amount, target, range, values }, index: number) => {
+    for (let i = 0; i < options.length; i++) {
+      const option = options[i];
       generate({
-        amount,
-        variable,
-        unit,
-        range,
-        target,
-        values,
+        count: option.count,
+        variable: option.variable,
+        unit: option.unit,
+        range: option.range,
+        target: option.target,
+        values: option.values,
         dom: dom === false ? false : true,
-        index,
+        index: i,
       });
-    });
+    }
   };
 
-  const getVars = (i?: number) => {
+  /**
+   * It returns a string of all the global variables in the current scope
+   * @returns A string of the global variables.
+   */
+  const getVars = (count?: number) => {
     load(false);
-    const result = i ? GLOBAL_VARS[i] : GLOBAL_VARS.join(',');
-    return JSON.parse(`[${result}]`);
+
+    let varStr = '';
+
+    for (const group of GLOBAL_VARS) {
+      const groupObj = JSON.parse(group);
+      const groupValues = Object.values(groupObj);
+      const groupValue = (groupValues[0] as any).slice(0, count);
+
+      for (const val of groupValue) {
+        const valueKeys = Object.keys(val);
+        const valueValues = Object.values(val);
+        const valueKey = valueKeys[0];
+        const valueValue = valueValues[0];
+
+        varStr += `${valueKey}: ${valueValue};`;
+      }
+    }
+
+    return varStr;
   };
 
-  return { load, getVars };
+  /**
+   * It returns an array of all the global variables in the current scope
+   * @param {number} [i] - The index of the variable you want to get. If you don't specify this, it will
+   * return all of the variables.
+   * @returns An array of the global variables.
+   */
+  const getVarsJSON = () => {
+    // Avoid calling the load function if it is not necessary
+    if (GLOBAL_VARS.length === 0) {
+      load(false);
+    }
+
+    let result = '[';
+    for (let i = 0; i < GLOBAL_VARS.length; i++) {
+      result += GLOBAL_VARS[i];
+      if (i !== GLOBAL_VARS.length - 1) {
+        result += ',';
+      }
+    }
+    result += ']';
+    return JSON.parse(result);
+  };
+
+  return { load, getVars, getVarsJSON };
 };
 
 export default randomCSSVariable;

@@ -39,14 +39,14 @@
         randomCSSVariables([
           {
             variable: 'position',
-            amount: window.children,
+            count: window.children,
             target: document.querySelector('#app'),
             range: { min: 0, max: 50, round: true },
             unit: '%',
           },
           {
             variable: 'blend-mode',
-            amount: window.children,
+            count: window.children,
             target: document.querySelector('#app'),
             range: { min: 0, max: 1, round: true },
             values: blendmode,
@@ -54,20 +54,20 @@
           {
             variable: 'direction',
             unit: 'deg',
-            amount: window.children,
+            count: window.children,
             target: document.querySelector('#app'),
             range: { min: 0, max: 360, round: true },
           },
           {
             variable: 'border',
-            amount: window.children,
+            count: window.children,
             target: document.querySelector('#app'),
             range: { min: 1, max: 50, round: true },
             unit: 'px',
           },
           {
             variable: 'offset',
-            amount: window.children,
+            count: window.children,
             target: document.querySelector('#app'),
             range: { min: -50, max: -10, round: true },
             unit: 'px',
@@ -76,19 +76,19 @@
 
         const r = Array.from({ length: window.children }).map((_, index) => ({
           variable: `rgb-r-${index}`,
-          amount: window.children,
+          count: window.children,
           target: document.querySelector('#app'),
           range: { min: 1, max: 255, round: true },
         }));
         const g = Array.from({ length: window.children }).map((_, index) => ({
           variable: `rgb-g-${index}`,
-          amount: window.children,
+          count: window.children,
           target: document.querySelector('#app'),
           range: { min: 1, max: 255, round: true },
         }));
         const b = Array.from({ length: window.children }).map((_, index) => ({
           variable: `rgb-b-${index}`,
-          amount: window.children,
+          count: window.children,
           target: document.querySelector('#app'),
           range: { min: 1, max: 255, round: true },
         }));

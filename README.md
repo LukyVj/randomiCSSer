@@ -59,7 +59,7 @@ By default, you'll see this on the body:
       randomCSSVariable({
         variable: 'random',
         unit: '',
-        amount: 10,
+        count: 10,
         range: { min: 1, max: 300, round: true },
       }).load();
     </script>
@@ -75,7 +75,7 @@ By default, you'll see this on the body:
 const App = () => {
   randomCSSVariable({
     target: document.querySelector('body'),
-    amount: 10,
+    count: 10,
     unit: 'px',
     variable: 'random',
     range: {
@@ -110,7 +110,7 @@ import randomCSSVariable from '../lib/index.js';
 import fs from 'fs';
 
 const randCSS = randomCSSVariable({
-  amount: 10,
+  count: 10,
   range: {
     min: 1,
     max: 100,
